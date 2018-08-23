@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Local Weather</title>
+        <style>
+            body: {
+                background-color: black;
+            }
+        </style>
+        <script src="src=https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+        </script>
+
+    </head>
+    <body>
+        <h1 class="header">The Weather Right Now</h1>
+        <p class="text" id="city"></p>
+        <p class="text" id="temp"></p>
+        <p class="text" id="desc"></p>
+        
+        <div class="weatherResponse">
+        </div>
+        
+        <button id="switch-bttn">Switch to Farenheit/Celsius</button>
+        <script type="text/javascript">
+        var long = coord.lon;
+        var lat = coord.lat;
+        var weatherAPI = "https://api.openweathermap.org/data/2.5/weather?q={name}&lat={lat}&lon={lon}";
+        
+        var key = "ac2c360b739bd8b428dc05243bbe6312";
+        
+             
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                $("#city").html("latitude: "+ position.coords.latitude + 
+                "longitude: "+ position.coords.longitude);
+                });
+        }
+            
+            
+        $.getJSON(weatherAPI, weatherCallback);
+        
+        function weatherCallback(data){
+            var city = data.name;
+            var long = data.coord.lon;
+            var lat = data.coord.lat;
+            var temp = data.main.temp;
+            var desc = data.weather[0].description;
+            
+            $('#city').append(city);
+            $('#temp').append(temp);
+            $('#desc').append(desc);
+            
+            $('.weatherResponse').append(city, long, lat, temp, description);
+            
+        }
+
+            
+        </script>
+    </body>
+    
+</html>
