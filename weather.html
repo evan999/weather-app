@@ -15,49 +15,83 @@
     </head>
     <body>
         <h1 class="header">The Weather Right Now</h1>
-        <p class="text" id="city"></p>
-        <p class="text" id="temp"></p>
-        <p class="text" id="desc"></p>
-        
-        <div class="weatherResponse">
-        </div>
+        <div class="container">
+            <p class="text" id="city"></p>
+            <span class="t" id="temp"></span>
+            <span id="degrees">°</span>
+            <span id="symbol">F</span>
+            <p class="text" id="desc"></p>
+            <img src="" alt="icon" id="icon">
+       </div>
         
         <button id="switch-bttn">Switch to Farenheit/Celsius</button>
         <script type="text/javascript">
-        var long = coord.lon;
-        var lat = coord.lat;
-        var weatherAPI = "https://api.openweathermap.org/data/2.5/weather?q={name}&lat={lat}&lon={lon}";
         
-        var key = "ac2c360b739bd8b428dc05243bbe6312";
+       
+        $(document).ready(function(){
+           
+          // var weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=:longitude&lat=:latitude";
+           
+           // Get Location
+           
+           function getLocation(){
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        var lat = position.coords.latitude;
+                        var long = position.coords.longitude;
+                        getWeather(lat, long);
+                    });
+                }
+           }
+           
+           $.getJSON(weatherAPI, function(data){
+               getWeather(data);
+           });
+           
+           function getWeather(lat, long){
+              var weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}";
+              updateDOM(data);
+           }
+           
+           function updateDOM(data){
+               
+              var city = data.name;
+              var temp = Math.round(data.main.temp);
+              var desc = data.weather[0].description;
+              var icon = data.weather[0].icon;
+    
+              $('#city').html(city);
+              $('#temp').html(temp);
+              $('#desc').html(desc);
+              $('#icon').attr('src', icon);
+           }
+         
+        });
         
-             
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                $("#city").html("latitude: "+ position.coords.latitude + 
-                "longitude: "+ position.coords.longitude);
-                });
+        function cToF(c){
+            return c * 9/5 + 32;
         }
-            
-            
-        $.getJSON(weatherAPI, weatherCallback);
         
-        function weatherCallback(data){
-            var city = data.name;
-            var long = data.coord.lon;
-            var lat = data.coord.lat;
-            var temp = data.main.temp;
-            var desc = data.weather[0].description;
-            
-            $('#city').append(city);
-            $('#temp').append(temp);
-            $('#desc').append(desc);
-            
-            $('.weatherResponse').append(city, long, lat, temp, description);
-            
+        function fToC(f){
+            return (f - 32) * 5 / 9;
         }
-
-            
+        
+        function toggleSymbol(){
+            if($('#symbol').innerHTML === 'F'){
+                $('#temp').innerHTML = fToC($('#symbol').innerHTML).toFixed(2);
+                $('#symbol').innerHTML = "C";
+            }
+            else if($('#symbol').innerHTML === 'C'){
+                $('#temp').innerHTML = cToF($('#symbol').innerHTML).toFixed(2);
+                $('#symbol').innerHTML = "F";
+            }
+            $('#switch-bttn').addEventListener("click", toggleSymbol);
+        }
+        
+        
+        
+        
+        
         </script>
     </body>
-    
 </html>
