@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+ crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+  integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="heading">
+      <h1 class="text-center">The Weather Right Now</h1>
+    </div>
+    <div class="row">
+    	<div>
+				<div>
+					<h2 id="temp"></h2>
+					<h3><span id="city"></span>, <span id="country"></span></h3>
+					<div id="icon">
+					  <img src="" class='img img-responsive center-block'>
+					</div>
+          <h4 id="desc"></h4><br/>
+					<div class="toggle" id="c">
+						<button type="button" class="btn btn-danger btn-lg">Toggle Units</button>
+					</div>
+				</div>
+			</div>
+		</div>
+    <br/>
+  </div>
+  <script src="weather_app.js"></script>
+</body>
+</html>
