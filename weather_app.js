@@ -3,6 +3,7 @@ $(document).ready(function() {
   var url="https://api.openweathermap.org/data/2.5/weather";
   var key = "ac2c360b739bd8b428dc05243bbe6312"; 
 	getLocation();
+	
 	function getWeather(){
 		$.ajax({
 			url: url,
@@ -24,6 +25,7 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
 	function getLocation(){
 		$.ajax({
 			url: "https://geoip-db.com/json/",
