@@ -7,91 +7,22 @@
                 background-color: black;
             }
         </style>
-        <script src="src=https://code.jquery.com/jquery-3.3.1.min.js"
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-        </script>
-
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
     <body>
         <h1 class="header">The Weather Right Now</h1>
         <div class="container">
             <p class="text" id="city"></p>
             <span class="t" id="temp"></span>
-            <span id="degrees">°</span>
+            <span id="degrees">&deg;</span>
             <span id="symbol">F</span>
             <p class="text" id="desc"></p>
             <img src="" alt="icon" id="icon">
        </div>
-        
+        <script src="weather.js"></script>
         <button id="switch-bttn">Switch to Farenheit/Celsius</button>
-        <script type="text/javascript">
-        
-       
-        $(document).ready(function(){
-           
-          // var weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=:longitude&lat=:latitude";
-           
-           // Get Location
-           
-           function getLocation(){
-                if(navigator.geolocation){
-                    navigator.geolocation.getCurrentPosition(function(position){
-                        var lat = position.coords.latitude;
-                        var long = position.coords.longitude;
-                        getWeather(lat, long);
-                    });
-                }
-           }
-           
-           $.getJSON(weatherAPI, function(data){
-               getWeather(data);
-           });
-           
-           function getWeather(lat, long){
-              var weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}";
-              updateDOM(data);
-           }
-           
-           function updateDOM(data){
-               
-              var city = data.name;
-              var temp = Math.round(data.main.temp);
-              var desc = data.weather[0].description;
-              var icon = data.weather[0].icon;
-    
-              $('#city').html(city);
-              $('#temp').html(temp);
-              $('#desc').html(desc);
-              $('#icon').attr('src', icon);
-           }
-         
-        });
-        
-        function cToF(c){
-            return c * 9/5 + 32;
-        }
-        
-        function fToC(f){
-            return (f - 32) * 5 / 9;
-        }
-        
-        function toggleSymbol(){
-            if($('#symbol').innerHTML === 'F'){
-                $('#temp').innerHTML = fToC($('#symbol').innerHTML).toFixed(2);
-                $('#symbol').innerHTML = "C";
-            }
-            else if($('#symbol').innerHTML === 'C'){
-                $('#temp').innerHTML = cToF($('#symbol').innerHTML).toFixed(2);
-                $('#symbol').innerHTML = "F";
-            }
-            $('#switch-bttn').addEventListener("click", toggleSymbol);
-        }
-        
-        
-        
-        
-        
-        </script>
     </body>
 </html>
