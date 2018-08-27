@@ -46,7 +46,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-	//toggle between celsius and fahrenheit
+
 	$('.toggle .btn').click(function(){
 		if($('.toggle').attr('id')=='c'){
 			$('#temp').html(fahrenheit+"&#8457;");
